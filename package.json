@@ -1,0 +1,61 @@
+{
+  "name": "@input-output-hk/mailchimp-subscribe",
+  "version": "0.0.1",
+  "description": "i18n friendly mailchimp subscriber",
+  "main": "build/index.js",
+  "homepage": "https://github.com/input-output-hk/mailchimp-subscribe",
+  "scripts": {
+    "build": "babel src --out-dir build --source-maps inline",
+    "lint": "eslint src/**/*.js",
+    "prepublish": "npm run build",
+    "prepublishOnly": "npm run lint && npm run test",
+    "test": "TZ=UTC jest src/",
+    "watch": "npm run build -- --watch"
+  },
+  "keywords": [
+    "mailchimp",
+    "subscribe",
+    "i18n",
+    "internationalization",
+    "locale",
+    "localization",
+    "language"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/input-output-hk/mailchimp-subscribe"
+  },
+  "bugs": {
+    "url": "https://github.com/input-output-hk/mailchimp-subscribe/issues"
+  },
+  "files": [
+    "/build",
+    "/src"
+  ],
+  "author": "Lewis Nelson <lewis.nelson@iohk.io>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/runtime": "^7.4.5",
+    "babel-eslint": "^10.0.2",
+    "babel-jest": "^24.8.0",
+    "coveralls": "^3.0.4",
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jest": "^22.7.1",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "jsonp": "^0.2.1"
+  }
+}

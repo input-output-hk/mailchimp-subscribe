@@ -1,0 +1,114 @@
+version: 2.1
+executors:
+  main:
+    docker:
+      - image: 'circleci/node:10'
+
+jobs:
+  install_dependencies:
+    executor: main
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - run: npm ci
+      - save_cache:
+          paths:
+            - ./node_modules
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+  build:
+    executor: main
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Building src
+          command: npm run build
+      - persist_to_workspace:
+          root: build
+          paths:
+            - "*"
+  deploy:
+    executor: main
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Publish to NPM
+          command: ./scripts/publish.sh
+  release:
+    executor: main
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "31:64:d2:e9:d2:e0:18:16:5d:d1:55:fe:53:48:8d:24"
+      - run:
+          name: Setup git config
+          command: |
+                git config user.email "$GIT_EMAIL"
+                git config user.name "$GIT_USERNAME"
+      - run:
+          name: Tag release
+          command: ./scripts/tag_release.sh
+  test:
+    executor: main
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Linting javascript
+          command: npm run lint
+      - run:
+          name: Running automated tests
+          command: npm test
+  update_test_coverage:
+    executor: main
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run:
+          name: Update coveralls test coverage
+          command: ./scripts/update_coverage.sh
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - install_dependencies
+      - test:
+          requires:
+            - install_dependencies
+      - update_test_coverage:
+          requires:
+            - install_dependencies
+          filters:
+            branches:
+              only: master
+      - build:
+          requires:
+            - install_dependencies
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - release
+          filters:
+            branches:
+              only: master
+  
