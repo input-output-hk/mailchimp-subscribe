@@ -49,27 +49,27 @@ yarn add @input-output-hk/mailchimp-subscribe
 
 ### Finding the 'uID' value
 
-<img alt="Mailchimp audience sign up forms instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/audience-signup-forms.jpg" width="800" />
+<img alt="Mailchimp audience sign up forms instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/audience-signup-forms.jpg" width="800" />
 
-<img alt="Mailchimp audience embedded forms instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/embedded-forms.jpg" width="800" />
+<img alt="Mailchimp audience embedded forms instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/embedded-forms.jpg" width="800" />
 
-<img alt="Mailchimp audience embedded forms uid instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/uid.jpg" width="800" />
+<img alt="Mailchimp audience embedded forms uid instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/uid.jpg" width="800" />
 
 ### Finding the 'audienceID' value
 
-<img alt="Mailchimp audience sign up forms instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/audience-signup-forms.jpg" width="800" />
+<img alt="Mailchimp audience sign up forms instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/audience-signup-forms.jpg" width="800" />
 
-<img alt="Mailchimp audience name and defaults" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/audience-name-and-defaults.jpg" width="800" />
+<img alt="Mailchimp audience name and defaults" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/audience-name-and-defaults.jpg" width="800" />
 
-<img alt="Mailchimp audience id instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/audience-id-instructions.jpg" width="800" />
+<img alt="Mailchimp audience id instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/audience-id-instructions.jpg" width="800" />
 
 ### Finding the 'listName' value
 
-<img alt="Mailchimp audience sign up forms instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/audience-signup-forms.jpg" width="800" />
+<img alt="Mailchimp audience sign up forms instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/audience-signup-forms.jpg" width="800" />
 
-<img alt="Mailchimp audience embedded forms instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/embedded-forms.jpg" width="800" />
+<img alt="Mailchimp audience embedded forms instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/embedded-forms.jpg" width="800" />
 
-<img alt="Mailchimp audience embedded forms uid instructions" src="https://github.com/input-output-hk/cardano-org-gatsby/blob/master/instructions/list-name.jpg" width="800" />
+<img alt="Mailchimp audience embedded forms uid instructions" src="https://github.com/input-output-hk/mailchimp-subscribe/blob/master/instructions/list-name.jpg" width="800" />
 
 ## Examples
 
