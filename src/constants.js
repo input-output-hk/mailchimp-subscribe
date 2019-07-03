@@ -1,13 +1,13 @@
 export const ERROR_CODES = {
-  GENERIC: 0,
-  INVALID_EMAIL: 1,
-  INVALID_EMAIL_DOMAIN: 2,
-  INVALID_EMAIL_USERNAME: 3,
-  EMAIL_ALREADY_SUBSCRIBED: 4,
-  TIMEOUT: 5
+  GENERIC: 'generic',
+  INVALID_EMAIL: 'invalid_email',
+  INVALID_EMAIL_DOMAIN: 'invalid_email_domain',
+  INVALID_EMAIL_USERNAME: 'invalid_email_username',
+  EMAIL_ALREADY_SUBSCRIBED: 'email_already_subscribed',
+  TIMEOUT: 'timeout'
 }
 
 export const SUCCESS_CODES = {
-  GENERIC: 0,
-  CONFIRM_EMAIL_ADDRESS: 1
+  GENERIC: 'generic',
+  CONFIRM_EMAIL_ADDRESS: 'confirm_email_address'
 }
