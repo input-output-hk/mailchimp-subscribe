@@ -1,7 +1,6 @@
 import jsonp from 'jsonp'
 import MailChimpError from './MailChimpError'
 import MailChimpSuccess from './MailChimpSuccess'
-import { ERROR_CODES, SUCCESS_CODES } from './constants'
 
 const validateFields = ({ email, listName, uID, audienceID }) => {
   if (!listName || listName.match(/\//)) throw new Error(`Invalid value '${listName}' for 'listName', should be the subdomain section of 'list-manage.com'; https://mylist.us.list-manage.com/ -> 'mylist.us'`)
@@ -20,13 +19,13 @@ const validateFields = ({ email, listName, uID, audienceID }) => {
  * @param {String} audienceID                     Audience ID
  * @param {Number} timeout                        Request timeout value in ms
  *
- * @return {Promise<MailChimpSuccess>}            Rejects with MailChimpError
+ * @return {Promise<MailChimpSuccess>}            Or rejects with MailChimpError
  */
 export default ({ email, customFields, listName, uID, audienceID, timeout = 3000 }) => {
   validateFields({ email, listName, uID, audienceID })
   const url = `//${listName}.list-manage.com`
   const endpoint = '/subscribe/post-json'
-  const parameters = {
+  let parameters = {
     u: uID,
     id: audienceID,
     EMAIL: email,
@@ -34,12 +33,14 @@ export default ({ email, customFields, listName, uID, audienceID, timeout = 3000
   }
 
   return new Promise((resolve, reject) => {
-    jsonp(`${url}${endpoint}?${Object.keys(parameters).map(key => `${key}=${encodeURIComponent(parameters[key])}`).join('&')}`, {
+    const queryString = Object.keys(parameters).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`).join('&')
+    const fullURL = `${url}${endpoint}?${queryString}`
+    jsonp(fullURL, {
       param: 'c',
       timeout
     }, (err, data) => {
       try {
-        if (err) throw new MailChimpError(err.message)
+        if (err) throw err
         if (data.result === 'error') throw new MailChimpError(data.msg)
         resolve(new MailChimpSuccess(data.msg))
       } catch (error) {
@@ -47,9 +48,4 @@ export default ({ email, customFields, listName, uID, audienceID, timeout = 3000
       }
     })
   })
-}
-
-export {
-  ERROR_CODES,
-  SUCCESS_CODES
 }

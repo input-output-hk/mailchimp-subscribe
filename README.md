@@ -3,7 +3,7 @@
 </h1>
 
 <p align="center">
-  An internationalization friendly mailchimp subscribe library. Subscribe emails to your mailing lists.
+  A lightweight [Mailchimp](https://mailchimp.com/) subscriber library supporting custom fields. Subscribe emails to your mailing lists.
 </p>
 
 <p align="center">
@@ -30,7 +30,6 @@
 
 ## Features
 
-* Error codes and success codes for i18n
 * Custom fields
 
 ## Install
@@ -73,10 +72,10 @@ yarn add @input-output-hk/mailchimp-subscribe
 
 ## Examples
 
-### Basic supporting localization
+### Basic without localization
 
 ```
-import subscribe, { SUCCESS_CODES, ERROR_CODES } from '@input-output-hk/mailchimp-subscribe'
+import subscribe from '@input-output-hk/mailchimp-subscribe'
 
 async function submitForm (email) {
   try {
@@ -87,72 +86,14 @@ async function submitForm (email) {
       listName: 'XXXXXX.XXXX'
     })
 
-    const successCode = result.getCode()
-    switch (successCode) {
-      case SUCCESS_CODES.CONFIRM_EMAIL_ADDRESS:
-        // Successfully subscribed, user needs to confirm email
-        return '' // Use the code to return a localized string message
-      case SUCCESS_CODES.GENERIC:
-        // Successfully subscribed, default code
-        return '' // Use the code to return a localized string message
-    }
-  } catch (error) {
-    // Original message returned from mailchimp
-    const message = error.message
-    const errorCode = error.getCode()
-
-    switch (successCode) {
-      case ERROR_CODES.INVALID_EMAIL:
-        // Email invalid
-        return '' // Use the code to return a localized string message
-
-      case ERROR_CODES.INVALID_EMAIL_DOMAIN:
-        // Domain section of email invalid
-        return '' // Use the code to return a localized string message
-
-      case ERROR_CODES.INVALID_EMAIL_USERNAME:
-        // Username section of email invalid
-        return '' // Use the code to return a localized string message
-
-      case ERROR_CODES.EMAIL_ALREADY_SUBSCRIBED:
-        // Email is already subscribed to mailing list
-        // Additional context is available here
-        // Link to manage the subscription for the email address
-        const manageSubscriptionLink = error.getContext().manageSubscriptionLink
-        return '' // Use the code to return a localized string message
-
-      case ERROR_CODES.TIMEOUT:
-        // Request timed out
-        return '' // Use the code to return a localized string message
-
-      case ERROR_CODES.GENERIC:
-        // Generic error code, server errors etc.
-        return '' // Use the code to return a localized string message
-    }
-  }
-}
-
-```
-
-### Basic without localization
-
-```
-import subscribe from '@input-output-hk/mailchimp-subscribe'
-
-async function submitForm (email) {
-  try {
-    await subscribe({
-      email,
-      uID: 'XXXXXXXXX',
-      audienceID: 'XXXXXXXXX',
-      listName: 'XXXXXX.XXXX'
-    })
-
-    return true
+    // Instance of MailChimpSuccess
+    // result.message is the msg value received from Mailchimp
+    return result
   } catch (error) {
     // handle error
+    // error is instance of MailChimpError when error originates from mailchimp
     // error.message is the message returned from Mailchimp if the error originated on mailchimp
-    return false
+    return error
   }
 }
 
@@ -176,11 +117,14 @@ async function submitForm (email) {
       }
     })
 
-    return true
+    // Instance of MailChimpSuccess
+    // result.message is the msg value received from Mailchimp
+    return result
   } catch (error) {
     // handle error
+    // error is instance of MailChimpError when error originates from mailchimp
     // error.message is the message returned from Mailchimp if the error originated on mailchimp
-    return false
+    return error
   }
 }
 
@@ -202,11 +146,14 @@ async function submitForm (email) {
       timeout: 6000
     })
 
-    return true
+    // Instance of MailChimpSuccess
+    // result.message is the msg value received from Mailchimp
+    return result
   } catch (error) {
     // handle error
+    // error is instance of MailChimpError when error originates from mailchimp
     // error.message is the message returned from Mailchimp if the error originated on mailchimp
-    return false
+    return error
   }
 }
 
