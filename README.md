@@ -91,10 +91,10 @@ async function submitForm (email) {
     switch (successCode) {
       case SUCCESS_CODES.CONFIRM_EMAIL_ADDRESS:
         // Successfully subscribed, user needs to confirm email
-        return '' // Use the code to return a localized string message
+        return 'Please check your email and confirm your email address to complete subscription'
       case SUCCESS_CODES.GENERIC:
         // Successfully subscribed, default code
-        return '' // Use the code to return a localized string message
+        return 'Successfully subscribed!'
     }
   } catch (error) {
     // Original message returned from mailchimp
@@ -104,38 +104,38 @@ async function submitForm (email) {
     switch (errorCode) {
       case ERROR_CODES.INVALID_EMAIL:
         // Email invalid
-        return '' // Use the code to return a localized string message
+        return 'Error, invalid email address'
 
       case ERROR_CODES.INVALID_EMAIL_DOMAIN:
         // Domain section of email invalid
-        return '' // Use the code to return a localized string message
+        return 'Error, domain section of email is invalid'
 
       case ERROR_CODES.INVALID_EMAIL_USERNAME:
         // Username section of email invalid
-        return '' // Use the code to return a localized string message
+        return 'Error, username section of email is invalid'
 
       case ERROR_CODES.EMAIL_ALREADY_SUBSCRIBED:
         // Email is already subscribed to mailing list
         // Additional context is available here
         // Link to manage the subscription for the email address
         const manageSubscriptionLink = error.getContext().manageSubscriptionLink
-        return '' // Use the code to return a localized string message
+        return `This email address is already subscribed. Manage subscription - ${manageSubscriptionLink}`
 
       case ERROR_CODES.TIMEOUT:
         // Request timed out
-        return '' // Use the code to return a localized string message
+        return 'Error, request timed out'
 
       case ERROR_CODES.TOO_MANY_REQUESTS:
         // Too many sign up requests sent with same email address
-        return '' // Use the code to return a localized string message
+        return `Error, too many subscription requests with ${email}`
 
       case ERROR_CODES.VALUE_MISSING:
         // A value is missing
-        return '' // Use the code to return a localized string message
+        return 'Error, missing value'
 
       case ERROR_CODES.GENERIC:
         // Generic error code, server errors etc.
-        return '' // Use the code to return a localized string message
+        return 'An error has occured'
     }
   }
 }
