@@ -204,6 +204,39 @@ describe('subscribe', () => {
           })
         })
       })
+
+      describe('too many requests', () => {
+        beforeEach(async () => {
+          data.msg = 'Recipient "example@example.org" has too many recent signup requests'
+          await assignError()
+        })
+
+        test('it rejects with the TOO_MANY_REQUESTS error code', () => {
+          expect(error.getCode()).toEqual(ERROR_CODES.TOO_MANY_REQUESTS)
+        })
+      })
+
+      describe('value missing', () => {
+        beforeEach(async () => {
+          data.msg = '1 - Please enter a value'
+          await assignError()
+        })
+
+        test('it rejects with the VALUE_MISSING error code', () => {
+          expect(error.getCode()).toEqual(ERROR_CODES.VALUE_MISSING)
+        })
+      })
+
+      describe('messages beginning with `1 - `', () => {
+        beforeEach(async () => {
+          data.msg = '1 - Some error'
+          await assignError()
+        })
+
+        test('it rejects with the VALUE_MISSING error code', () => {
+          expect(error.getCode()).toEqual(ERROR_CODES.VALUE_MISSING)
+        })
+      })
     })
   })
 })

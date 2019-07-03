@@ -23,7 +23,10 @@ export default class MailChimpError extends Error {
     if (message.includes('the domain portion of the email address is invalid')) return ERROR_CODES.INVALID_EMAIL_DOMAIN
     if (message.includes('the username portion of the email address is invalid')) return ERROR_CODES.INVALID_EMAIL_USERNAME
     if (message.includes('is already subscribed to list')) return ERROR_CODES.EMAIL_ALREADY_SUBSCRIBED
+    if (message.includes('please enter a value')) return ERROR_CODES.VALUE_MISSING
+    if (message.includes('has too many recent signup requests')) return ERROR_CODES.TOO_MANY_REQUESTS
     if (message.match(/^0\s-\s/)) return ERROR_CODES.INVALID_EMAIL
+    if (message.match(/^1\s-\s/)) return ERROR_CODES.VALUE_MISSING
     return ERROR_CODES.GENERIC
   }
 

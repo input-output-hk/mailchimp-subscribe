@@ -125,6 +125,14 @@ async function submitForm (email) {
         // Request timed out
         return '' // Use the code to return a localized string message
 
+      case ERROR_CODES.TOO_MANY_REQUESTS:
+        // Too many sign up requests sent with same email address
+        return '' // Use the code to return a localized string message
+
+      case ERROR_CODES.VALUE_MISSING:
+        // A value is missing
+        return '' // Use the code to return a localized string message
+
       case ERROR_CODES.GENERIC:
         // Generic error code, server errors etc.
         return '' // Use the code to return a localized string message
