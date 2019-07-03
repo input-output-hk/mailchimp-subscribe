@@ -101,7 +101,7 @@ async function submitForm (email) {
     const message = error.message
     const errorCode = error.getCode()
 
-    switch (successCode) {
+    switch (errorCode) {
       case ERROR_CODES.INVALID_EMAIL:
         // Email invalid
         return '' // Use the code to return a localized string message

@@ -34,7 +34,9 @@ export default ({ email, customFields, listName, uID, audienceID, timeout = 3000
   }
 
   return new Promise((resolve, reject) => {
-    jsonp(`${url}${endpoint}?${Object.keys(parameters).map(key => `${key}=${encodeURIComponent(parameters[key])}`).join('&')}`, {
+    const queryString = Object.keys(parameters).map(key => `${encodeURIComponent(key)}=${encodeURIComponent(parameters[key])}`).join('&')
+    const fullURL = `${url}${endpoint}?${queryString}`
+    jsonp(fullURL, {
       param: 'c',
       timeout
     }, (err, data) => {
