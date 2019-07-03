@@ -99,15 +99,15 @@ workflows:
       - build:
           requires:
             - install_dependencies
-      - release:
+      - deploy:
           requires:
             - build
           filters:
             branches:
               only: master
-      - deploy:
+      - release:
           requires:
-            - release
+            - build
           filters:
             branches:
               only: master
